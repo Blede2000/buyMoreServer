@@ -8,7 +8,7 @@ router.get("/", function (req, res) {
 });
 
 const BCRYPT_SALT_ROUNDS = 10;
-router.post("/register", async function (req, res, next) {
+router.post("/register", async function (req, res) {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
@@ -44,4 +44,54 @@ router.post("/register", async function (req, res, next) {
     });
 });
 
+router.post("/login", async function (req, res) {
+    const email = req.body.email;
+    const resPwd = req.body.password;
+    const users = await User.find({ email }).exec();
+    if (users.length == 0)
+        res.status(400).json({ message: "No such user in database" });
+    // console.log(resPwd);
+    // console.log(users[0].password);
+    bcrypt.compare(resPwd, users[0].password).then(function (result) {
+        console.log(resPwd, users[0].password);
+        if (result) {
+            res.status(201).json(users[0]);
+        } else {
+            res.status(400).json({
+                message: "Wrong Password",
+            });
+        }
+    });
+    // bcrypt.compare(resPwd, users[0].password, async function (err, result) {
+    //     console.log(resPwd, users[0].password);
+    //     try {
+    //         if (result) {
+    //             res.status(201).json(user);
+    //         } else {
+    //             res.status(400).json({
+    //                 message: "Wrong Password",
+    //             });
+    //         }
+    //     } catch (err) {
+    //         res.status(400).json({ message: err.message });
+    //     }
+    // });
+});
+
+// usersDB
+//     .getUserByUsername(username)
+//     .then(function (user) {
+//         return bcrypt.compare(password, user.password);
+//     })
+//     .then(function (samePassword) {
+//         if (!samePassword) {
+//             res.status(403).send();
+//         }
+//         res.send();
+//     })
+//     .catch(function (error) {
+//         console.log("Error authenticating user: ");
+//         console.log(error);
+//         next();
+//     });
 module.exports = router;
