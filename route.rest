@@ -1,0 +1,21 @@
+POST  http://localhost:3000/user/register
+Content-Type: application/json
+
+{
+        "firstName": "Alejandrooooo",
+        "lastName": "Alvarez",
+        "email": "alejandro.alvarezp00@gmail.com",
+        "password": "something123.",
+        "confirmPassword": "something123.",
+        "address": "31 Stevenvale Drive",
+        "address2": "a",
+        "phone": "4372263198",
+        "DateOfBirth": "2000-11-05",
+        "city": "Scarborough",
+        "province": "ON",
+        "postalCode": "M1G1C6"
+}
+
+###
+
+GET http://localhost:3000/user
