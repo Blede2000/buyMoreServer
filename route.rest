@@ -28,3 +28,18 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/user
+
+###
+POST http://localhost:3000/user/win
+Content-Type: application/json
+
+{
+    "email": "alejandro.alvarezp00@gmail.com"
+}
+###
+POST http://localhost:3000/user/lose
+Content-Type: application/json
+
+{
+    "email": "alejandro.alvarezp00@gmail.com"
+}
