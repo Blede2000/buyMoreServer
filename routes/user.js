@@ -78,6 +78,60 @@ router.post("/login", async function (req, res) {
     // });
 });
 
+router.post("/win", async function (req, res) {
+    const email = req.body.email;
+    try {
+        let user = await User.findOneAndUpdate(
+            { email },
+            {
+                lastPlayed: new Date(),
+                didWin: true,
+            }
+        );
+        user = await User.findOne({ email });
+        console.log(user);
+        res.status(201).json(user);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+router.post("/lose", async function (req, res) {
+    const email = req.body.email;
+    try {
+        let user = await User.findOneAndUpdate(
+            { email },
+            {
+                lastPlayed: new Date(),
+                didWin: false,
+            }
+        );
+        user = await User.findOne({ email });
+        console.log(user);
+        res.status(201).json(user);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+//
+//
+// });
+// router.post("/lost", async function (req, res) {
+//     const email = req.body.email;
+//     try {
+//         let user = await User.findOneAndUpdate(
+//             { email },
+//             {
+//                 lastPlayed: new Date(),
+//                 didWin: false,
+//             }
+//         );
+//         user = await User.findOne({ email });
+//         res.status(201).json({ message: "nice" });
+//     } catch (err) {
+//         res.status(400).json({ message: err.message });
+//     }
+// });
+
 // usersDB
 //     .getUserByUsername(username)
 //     .then(function (user) {

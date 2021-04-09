@@ -19,31 +19,39 @@ const userSchema = new mongoose.Schema({
     },
     address: {
         type: "String",
-        requiired: true,
+        required: true,
     },
     address2: {
         type: "String",
-        requiired: true,
+        required: true,
     },
     phone: {
         type: "String",
-        requiired: true,
+        required: true,
     },
     dateOfBirth: {
         type: "String",
-        requiired: true,
+        required: true,
     },
     city: {
         type: "String",
-        requiired: true,
+        required: true,
     },
     province: {
         type: "String",
-        requiired: true,
+        required: true,
     },
     postalCode: {
         type: "String",
-        requiired: true,
+        required: true,
+    },
+    lastPlayed: {
+        type: "Date",
+    },
+    didWin: {
+        type: "Boolean",
+        default: null,
+        required: true,
     },
 });
 
